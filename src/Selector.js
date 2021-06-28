@@ -1,6 +1,5 @@
 class Selector {
 
-
   constructor(movies) {
 
     this.movies = movies
@@ -54,6 +53,17 @@ class Selector {
       d3.select("#slider-label").text(minYear + "-" + maxYear)
       movies._selected_years = [minYear, maxYear]
     });
+
+    d3.select("#btn-search").on("click", () => { console.log("start search") })
+    d3.select("#btn-reset").on("click", () => {
+      this.genres_div.selectAll("input").attr("class", "btn btn-light btn-selector")
+      movies._selected_genres = []
+      this.ratings_div.selectAll("input").attr("class", "btn btn-light btn-selector")
+      movies._selected_ratings = []
+      this.slider.range(1986, 2016)
+      d3.select("#slider-label").text(1986 + "-" + 2016)
+      movies._selected_years = [1986, 2016]
+    })
 
   }
 

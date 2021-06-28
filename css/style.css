@@ -57,6 +57,7 @@ svg{
     grid-column: 4 ;
     grid-row: 1;
     text-align: left;
+    overflow: auto;
   }
 
   .d > div{
