@@ -1,5 +1,7 @@
 function drawScatterPlotPCA(data) {
 
+
+
   var data_pca = computePCA(data)
 
   d3.select("#scatterPlotPCA").select("*").remove().exit()
@@ -60,19 +62,6 @@ function drawScatterPlotPCA(data) {
       .ticks(numberOfTicksTargetY)
     );
 
-  /*
-    var nested_data = d3.nest()
-      .key(function(d) { return d.rating; })
-      .entries(data);
-
-    var color_range = nested_data.map((d) => { return d.key })
-    var colors_number = color_range.length
-
-
-    var myColor = d3.scaleOrdinal()
-      .domain(color_range)
-      .range(d3.schemeTableau10);
-      */
 
   // Add dots
   svg.append('g')

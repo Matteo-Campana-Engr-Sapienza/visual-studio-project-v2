@@ -56,9 +56,10 @@ class Selector {
 
     d3.select("#btn-search").on("click", () => {
 
-
       reDrawScatterPlotPCA(movies.getFilteredData())
       updateTop10Movies(movies.getFilteredData(), movies._movies_data)
+      d3.select("#circle-packing-container").select("*").remove().exit()
+      drawCirclePacking(movies.getFilteredData(), movies)
 
 
     })
@@ -71,7 +72,11 @@ class Selector {
       d3.select("#slider-label").text(1986 + "-" + 2016)
       movies._selected_years = [1986, 2016]
 
+      d3.select("#circle-packing-container").select("*").remove().exit()
+      drawCirclePacking(movies._movies_data, movies)
+
       reDrawScatterPlotPCA(movies._movies_data)
+
       updateTop10Movies(movies._movies_data, movies._movies_data)
     })
 

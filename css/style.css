@@ -76,3 +76,48 @@ svg{
   .btn-selector{
     margin: 0.2rem;
   }
+
+  /* ---------------------------------------------------------------------------*/
+/* -------------------------- Circle Packing Style----------------------------*/
+/* ---------------------------------------------------------------------------*/
+
+.node {
+  cursor: pointer;
+}
+
+.node:hover {
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.node--leaf {
+  fill: white;
+}
+
+.node--leaf >.label{
+  font-size: 100%;
+}
+
+.label {
+  font: 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-anchor: middle;
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+  font-size: large;
+}
+
+.label,
+.node--root,
+.node--leaf {
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------------------*/
+
+#scatterPlotPCA:hover .pca-circle{
+  opacity:0.7
+}
+
+.pca-circle:hover{
+  stroke: #000;
+  opacity: 1;
+}

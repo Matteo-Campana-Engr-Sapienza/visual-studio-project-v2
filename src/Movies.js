@@ -17,10 +17,14 @@ class Movies {
 
     this.selected_genres = []
     this.selected_ratings = []
-    this.selected_years = []
+    this.selected_years = [1986, 2016]
+
 
     this.minYear = d3.min(this.movies_data.map((d) => { return d.year }))
     this.maxYear = d3.max(this.movies_data.map((d) => { return d.year }))
+
+    this.focus_on_movies = []
+    this.selected_movies = []
 
   }
 
@@ -117,20 +121,48 @@ class Movies {
 
   //----------------------------------------------------------------------------
 
-  get selected_years() {
-    return this._selected_ratings;
+  get focus_on_movies() {
+    return this._focus_on_movies;
   }
-  set selected_years(range) {
-    this._selected_ratings = range
+  set focus_on_movies(movies) {
+    this._focus_on_movies = movies
   }
 
+  //----------------------------------------------------------------------------
+
+  get selected_movies() {
+    return this._selected_movies;
+  }
+  set selected_movies(movies) {
+    this._selected_movies = movies
+  }
+
+  addMovieToSelection(movie) {
+    if (!this._selected_movies.includes(movie)) {
+      this._selected_movies.push(movie)
+    }
+  }
+
+  removeMovieFromSelection(movie_name) {
+    if (this._selected_movies.includes(movie)) {
+      this._selected_movies = this._selected_movies.filter(function(d) { return d.name != movie_name })
+    }
+  }
+
+  //----------------------------------------------------------------------------
+  get selected_years() {
+    return this._selected_years;
+  }
+  set selected_years(range) {
+    this._selected_years = range
+  }
 
   //----------------------------------------------------------------------------
   //----------------------------------------------------------------------------
 
   getFilteredData() {
     return this._movies_data.filter((d) => {
-      return (this._selected_genres.length == 0 || this._selected_genres.includes(d.genre)) && (this._selected_ratings.length == 0 || this._selected_ratings.includes(d.rating)) && (d.year >= this.minYear && d.year <= this._maxYear)
+      return (this._selected_genres.length == 0 || this._selected_genres.includes(d.genre)) && (this._selected_ratings.length == 0 || this._selected_ratings.includes(d.rating)) && d.year >= this._selected_years[0] && d.year <= this._selected_years[1]
     })
   }
 

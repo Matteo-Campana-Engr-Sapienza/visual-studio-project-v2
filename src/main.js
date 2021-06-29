@@ -8,23 +8,22 @@ window.onload = () => {
 
     top10Movies(movies._movies_data)
     drawScatterPlotPCA(movies._movies_data)
+    drawCirclePacking(movies._movies_data, movies)
 
     /*----------------------------------------------------------------------------*/
     /*------------------ Wait the finish of the resize input ---------------------*/
     /*----------------------------------------------------------------------------*/
     function resizeHandler() {
-      //d3.select("#circle-packing-container").select("*").remove().exit()
+      d3.select("#circle-packing-container").select("*").remove().exit()
       d3.select("#top10Movies").select("*").remove().exit()
       d3.select("#scatterPlotPCA").select("*").remove().exit()
-      //drawCirclePacking(movies._movies_data)
 
+      drawCirclePacking(movies.getFilteredData(), movies)
       top10Movies(movies._movies_data)
       drawScatterPlotPCA(movies._movies_data)
 
       reDrawScatterPlotPCA(movies.getFilteredData())
       updateTop10Movies(movies.getFilteredData(), movies._movies_data)
-
-
     }
 
     var rtime;
