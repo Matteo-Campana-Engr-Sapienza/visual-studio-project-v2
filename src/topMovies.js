@@ -1,4 +1,4 @@
-function top10Movies(data) {
+function top10Movies(data, movies, selector) {
 
   var parentWidth = parseInt(d3.select("#top10Movies").style("width"))
   var parentHeigth = parseInt(d3.select("#top10Movies").style("height"))
@@ -77,11 +77,7 @@ function top10Movies(data) {
   var color_range = nested_data.map((d) => { return d.key })
   var colors_number = color_range.length
 
-  /*
-    var myColor = d3.scaleOrdinal()
-      .domain(color_range)
-      .range(d3.schemeTableau10);
-      */
+
 
   myColor = d3.scaleOrdinal()
     .domain(color_range)
@@ -101,6 +97,15 @@ function top10Movies(data) {
     // no bar at the beginning thus:
     .attr("height", function(d) { return height - y(0); }) // always equal to 0
     .attr("y", function(d) { return y(0); })
+    .attr("name", function(d) { return d.key; })
+    .on("click", function(d) {
+
+      var circle = d3.select("#scatterPlotPCA").selectAll("circle").filter(function(circle) {
+        return circle.label.name == d.key
+      })
+      var movie = circle._groups[0][0].__data__.label
+      movies.addMovieToSelection(movie)
+    })
 
   // Animation
   svg.selectAll("rect")
@@ -159,7 +164,7 @@ function top10Movies(data) {
 
 
 
-function updateTop10Movies(new_data, old_data) {
+function updateTop10Movies(new_data, old_data, movies, selector) {
 
   var parentWidth = parseInt(d3.select("#top10Movies").style("width"))
   var parentHeigth = parseInt(d3.select("#top10Movies").style("height"))
@@ -227,6 +232,15 @@ function updateTop10Movies(new_data, old_data) {
     // no bar at the beginning thus:
     .attr("height", function(d) { return height - y(0); }) // always equal to 0
     .attr("y", function(d) { return y(0); })
+    .attr("name", function(d) { return d.key; })
+    .on("click", function(d) {
+
+      var circle = d3.select("#scatterPlotPCA").selectAll("circle").filter(function(circle) {
+        return circle.label.name == d.key
+      })
+      var movie = circle._groups[0][0].__data__.label
+      movies.addMovieToSelection(movie)
+    })
 
   // Animation
   svg.selectAll("rect")
@@ -236,4 +250,6 @@ function updateTop10Movies(new_data, old_data) {
     .attr("y", function(d) { return y(d.value); })
     .attr("height", function(d) { return height - y(d.value); })
     .delay(function(d, i) { return (i * 100) })
+
+
 }

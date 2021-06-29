@@ -1,6 +1,9 @@
-function drawScatterPlotPCA(data) {
+function drawScatterPlotPCA(data, movies, selector) {
 
-
+  if (!data || data.length == 0) {
+    alert("NO DATA RESET RESEARCH")
+    return
+  }
 
   var data_pca = computePCA(data)
 
@@ -74,9 +77,11 @@ function drawScatterPlotPCA(data) {
     .attr("r", 3.5)
     .style("fill", function(d) { return myColor(d.label.rating) })
     .attr("opacity", 1)
+    .attr("name", function(d) { return d.label.name })
 
   // Update chart
   svg.selectAll("circle")
+    .attr("name", function(d) { return d.label.name })
     .transition()
     .delay(function(d, i) { return (i * 3) })
     .duration(200)
@@ -130,6 +135,10 @@ function drawScatterPlotPCA(data) {
     .on("mouseover", mouseover)
     .on("mousemove", mousemove)
     .on("mouseleave", mouseleave)
+    .on("click", function(d) {
+      // console.log(this)
+      // console.log(d)
+    })
   /* ---------------------------------------------------------------------------- */
 
   // text label for the y axis

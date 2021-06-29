@@ -56,10 +56,10 @@ class Selector {
 
     d3.select("#btn-search").on("click", () => {
 
-      reDrawScatterPlotPCA(movies.getFilteredData())
-      updateTop10Movies(movies.getFilteredData(), movies._movies_data)
+      reDrawScatterPlotPCA(movies.getFilteredData(), movies, this)
+      updateTop10Movies(movies.getFilteredData(), movies._movies_data, movies, this)
       d3.select("#circle-packing-container").select("*").remove().exit()
-      drawCirclePacking(movies.getFilteredData(), movies)
+      drawCirclePacking(movies.getFilteredData(), movies, this)
 
 
     })
@@ -73,11 +73,11 @@ class Selector {
       movies._selected_years = [1986, 2016]
 
       d3.select("#circle-packing-container").select("*").remove().exit()
-      drawCirclePacking(movies._movies_data, movies)
+      drawCirclePacking(movies._movies_data, movies, this)
 
-      reDrawScatterPlotPCA(movies._movies_data)
+      reDrawScatterPlotPCA(movies._movies_data, movies, this)
 
-      updateTop10Movies(movies._movies_data, movies._movies_data)
+      updateTop10Movies(movies._movies_data, movies._movies_data, movies, this)
     })
 
   }

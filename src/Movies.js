@@ -140,6 +140,8 @@ class Movies {
   addMovieToSelection(movie) {
     if (!this._selected_movies.includes(movie)) {
       this._selected_movies.push(movie)
+      console.log(movie)
+      d3.select("#selected-movies").append("div").text(movie.name)
     }
   }
 

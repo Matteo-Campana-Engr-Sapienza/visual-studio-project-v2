@@ -1,4 +1,4 @@
-function drawCirclePacking(data, movies) {
+function drawCirclePacking(data, movies, selector) {
 
   var parentHeight = parseInt(d3.select("#circle-packing-container").style("height"), 10)
   var parentWidth = parseInt(d3.select("#circle-packing-container").style("width"), 10)
@@ -148,19 +148,6 @@ function drawCirclePacking(data, movies) {
     } else {
       movies._focus_on_movies = []
     }
-
-
-    // if (ancestors.length > 0) {
-    //   updateTop10Movies(data_to_update, data)
-    //   reDrawScatterPlotPCA(data_to_update)
-    // } else {
-    //   data_to_update = data.filter((d) => {
-    //     return +d.year > 0
-    //   })
-    //   updateTop10Movies(data_to_update, data)
-    //   reDrawScatterPlotPCA(data_to_update)
-    // }
-
 
 
     var focus0 = focus;

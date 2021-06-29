@@ -6,9 +6,9 @@ window.onload = () => {
     let movies = new Movies(data)
     let selector = new Selector(movies)
 
-    top10Movies(movies._movies_data)
-    drawScatterPlotPCA(movies._movies_data)
-    drawCirclePacking(movies._movies_data, movies)
+    top10Movies(movies._movies_data, movies, selector)
+    drawScatterPlotPCA(movies._movies_data, movies, selector)
+    drawCirclePacking(movies._movies_data, movies, selector)
 
     /*----------------------------------------------------------------------------*/
     /*------------------ Wait the finish of the resize input ---------------------*/
@@ -18,12 +18,12 @@ window.onload = () => {
       d3.select("#top10Movies").select("*").remove().exit()
       d3.select("#scatterPlotPCA").select("*").remove().exit()
 
-      drawCirclePacking(movies.getFilteredData(), movies)
-      top10Movies(movies._movies_data)
-      drawScatterPlotPCA(movies._movies_data)
+      drawCirclePacking(movies.getFilteredData(), movies, selector)
+      top10Movies(movies._movies_data, movies, selector)
+      drawScatterPlotPCA(movies._movies_data, movies, selector)
 
-      reDrawScatterPlotPCA(movies.getFilteredData())
-      updateTop10Movies(movies.getFilteredData(), movies._movies_data)
+      reDrawScatterPlotPCA(movies.getFilteredData(), movies, selector)
+      updateTop10Movies(movies.getFilteredData(), movies._movies_data, movies, selector)
     }
 
     var rtime;

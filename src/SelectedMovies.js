@@ -9,7 +9,7 @@ class SelectedMovies {
   drawSelectedMovies() {
     this.genres_div.selectAll("p").remove()
     this._selected_movies.map((d) => {
-      this.genres_div.append("p").text(d.name)
+      this.genres_div.append("p").text(d)
     })
   }
 }
