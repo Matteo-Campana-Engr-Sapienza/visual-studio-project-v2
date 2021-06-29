@@ -54,7 +54,14 @@ class Selector {
       movies._selected_years = [minYear, maxYear]
     });
 
-    d3.select("#btn-search").on("click", () => { console.log("start search") })
+    d3.select("#btn-search").on("click", () => {
+
+
+      reDrawScatterPlotPCA(movies.getFilteredData())
+      updateTop10Movies(movies.getFilteredData(), movies._movies_data)
+
+
+    })
     d3.select("#btn-reset").on("click", () => {
       this.genres_div.selectAll("input").attr("class", "btn btn-light btn-selector")
       movies._selected_genres = []
@@ -63,6 +70,9 @@ class Selector {
       this.slider.range(1986, 2016)
       d3.select("#slider-label").text(1986 + "-" + 2016)
       movies._selected_years = [1986, 2016]
+
+      reDrawScatterPlotPCA(movies._movies_data)
+      updateTop10Movies(movies._movies_data, movies._movies_data)
     })
 
   }

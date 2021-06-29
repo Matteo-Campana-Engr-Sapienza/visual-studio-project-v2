@@ -22,8 +22,6 @@ class Movies {
     this.minYear = d3.min(this.movies_data.map((d) => { return d.year }))
     this.maxYear = d3.max(this.movies_data.map((d) => { return d.year }))
 
-    console.log(this.minYear)
-    console.log(this.maxYear)
   }
 
   //----------------------------------------------------------------------------
@@ -129,6 +127,12 @@ class Movies {
 
   //----------------------------------------------------------------------------
   //----------------------------------------------------------------------------
+
+  getFilteredData() {
+    return this._movies_data.filter((d) => {
+      return (this._selected_genres.length == 0 || this._selected_genres.includes(d.genre)) && (this._selected_ratings.length == 0 || this._selected_ratings.includes(d.rating)) && (d.year >= this.minYear && d.year <= this._maxYear)
+    })
+  }
 
 }
 
