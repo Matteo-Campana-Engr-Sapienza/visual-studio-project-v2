@@ -149,6 +149,17 @@ function drawCirclePacking(data, movies, selector) {
       movies._focus_on_movies = []
     }
 
+    if (ancestors.length > 0) {
+      reDrawScatterPlotPCA(data_to_update, movies, selector)
+      updateTop10Movies(data_to_update, movies._movies_data, movies, selector)
+    } else {
+      data_to_update = data.filter((d) => {
+        return +d.year > 0
+      })
+      reDrawScatterPlotPCA(data_to_update, movies, selector)
+      updateTop10Movies(data_to_update, movies._movies_data, movies, selector)
+    }
+
 
     var focus0 = focus;
     focus = d;
