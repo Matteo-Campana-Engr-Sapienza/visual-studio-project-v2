@@ -141,7 +141,7 @@ class Movies {
   removeMovieFromSelection(movie) {
     if (this._selected_movies.includes(movie)) {
       this._selected_movies = this._selected_movies.filter(function(d) { return d != movie })
-      var div = document.getElementById("div-" + movie.name.replace(" ", ""))
+      var div = document.getElementById("div-" + movie.name.replaceAll(/[^a-zA-Z0-9]/g, '_'))
       d3.select(div).remove()
 
       var circle = d3.select("#scatterPlotPCA").selectAll("circle").filter(function(circle) {
@@ -150,6 +150,9 @@ class Movies {
       if (circle) {
         circle.attr("stroke", null)
         circle.attr("stroke-width", null)
+
+        var circle_packing = d3.select("#circle-packing-" + movie.name.replaceAll(/[^a-zA-Z0-9]/g, '_'))
+        circle_packing.style("fill", "#fff")
       }
     }
   }
@@ -157,12 +160,12 @@ class Movies {
   addMovieToSelection(movie) {
     if (!this._selected_movies.includes(movie)) {
       this._selected_movies.push(movie)
-      //console.log(movie)
+
       d3.select("#selected-movies")
         .append("div")
         .attr("class", "div-selected-movie")
         .text(movie.name)
-        .attr("id", "div-" + movie.name.replace(" ", ""))
+        .attr("id", "div-" + movie.name.replaceAll(/[^a-zA-Z0-9]/g, '_'))
         .append("input")
         .attr("type", "button")
         .attr("value", "remove")
@@ -175,6 +178,15 @@ class Movies {
         return circle.label.name == movie.name
       })
       if (circle) {
+
+        var circle_packing = d3.select("#circle-packing-" + movie.name.replaceAll(/[^a-zA-Z0-9]/g, '_'))
+        // var rgb = circle.style("fill").split("(")[1].split(")")[0]
+        // console.log(rgb)
+        // var hex = rgbToHex(rgb[0], rgb[1], rgb[2])
+        // console.log(hex)
+        //circle_packing.style("fill", "#c35f22")
+
+        circle_packing.style("fill", myColor(movie.rating))
         circle.attr("stroke", "#000")
         circle.attr("stroke-width", "2px")
       }
@@ -202,4 +214,13 @@ class Movies {
 
 const unique = (value, index, self) => {
   return self.indexOf(value) === index
+}
+
+function componentToHex(c) {
+  var hex = c.toString(16);
+  return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r, g, b) {
+  return ("#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)).replaceAll(",", "");
 }

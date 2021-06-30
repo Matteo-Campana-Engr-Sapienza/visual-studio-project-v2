@@ -67,11 +67,20 @@ function drawCirclePacking(data, movies, selector) {
     .attr("class", function(d) {
       return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root";
     })
+    .attr("id", function(d) {
+      if (d.height == 0) {
+        return "circle-packing-" + d.data.name.replaceAll(/[^a-zA-Z0-9]/g, '_')
+      }
+      return "parent-node"
+    })
     .style("fill", function(d) {
       return d.children ? color(d.depth) : null;
     })
     .on("click", function(d) {
-      if (focus !== d) zoom(d), d3.event.stopPropagation();
+      if (focus !== d) {
+        zoom(d);
+        d3.event.stopPropagation();
+      };
     });
 
   var text = g.selectAll("text")

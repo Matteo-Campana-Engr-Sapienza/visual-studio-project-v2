@@ -10,6 +10,7 @@ window.onload = () => {
     drawScatterPlotPCA(movies._movies_data, movies, selector)
     drawCirclePacking(movies._movies_data, movies, selector)
 
+
     /*----------------------------------------------------------------------------*/
     /*------------------ Wait the finish of the resize input ---------------------*/
     /*----------------------------------------------------------------------------*/
