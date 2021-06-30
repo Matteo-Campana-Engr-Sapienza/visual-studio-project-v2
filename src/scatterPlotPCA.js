@@ -90,6 +90,7 @@ function drawScatterPlotPCA(data, movies, selector) {
 
   svg.selectAll("circle").attr("class", "pca-circle")
 
+
   /* ---------------------------------------------------------------------------- */
 
   // Add a tooltip div. Here I define the general feature of the tooltip: stuff that do not depend on the data point.
@@ -136,8 +137,8 @@ function drawScatterPlotPCA(data, movies, selector) {
     .on("mousemove", mousemove)
     .on("mouseleave", mouseleave)
     .on("click", function(d) {
-      // console.log(this)
-      // console.log(d)
+      movies.addMovieToSelection(d.label)
+
     })
   /* ---------------------------------------------------------------------------- */
 

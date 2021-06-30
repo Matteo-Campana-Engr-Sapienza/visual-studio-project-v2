@@ -112,7 +112,7 @@ svg{
   pointer-events: none;
 }
 
-/* ---------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
 
 #scatterPlotPCA:hover .pca-circle{
   opacity:0.7
@@ -121,4 +121,18 @@ svg{
 .pca-circle:hover{
   stroke: #000;
   opacity: 1;
+}
+
+/*----------------------------------------------------------------------------*/
+
+.btn-remove-movie{
+  float: right;
+}
+
+.div-selected-movie{
+  margin: 1rem;
+  border-radius: 10px;
+  text-align: left;
+  background-color: #64b6f6;
+  padding: 1rem;
 }

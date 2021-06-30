@@ -147,7 +147,6 @@ class Movies {
       var circle = d3.select("#scatterPlotPCA").selectAll("circle").filter(function(circle) {
         return circle.label.name == movie.name
       })
-
       if (circle) {
         circle.attr("stroke", null)
       }
@@ -160,14 +159,23 @@ class Movies {
       //console.log(movie)
       d3.select("#selected-movies")
         .append("div")
+        .attr("class", "div-selected-movie")
         .text(movie.name)
         .attr("id", "div-" + movie.name.replace(" ", ""))
         .append("input")
         .attr("type", "button")
         .attr("value", "remove")
+        .attr("class", "btn btn-light btn-remove-movie")
         .on("click", () => {
           this.removeMovieFromSelection(movie)
         })
+
+      var circle = d3.select("#scatterPlotPCA").selectAll("circle").filter(function(circle) {
+        return circle.label.name == movie.name
+      })
+      if (circle) {
+        circle.attr("stroke", "#000")
+      }
     }
   }
 
