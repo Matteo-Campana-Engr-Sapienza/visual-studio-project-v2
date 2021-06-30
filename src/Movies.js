@@ -149,6 +149,7 @@ class Movies {
       })
       if (circle) {
         circle.attr("stroke", null)
+        circle.attr("stroke-width", null)
       }
     }
   }
@@ -175,6 +176,7 @@ class Movies {
       })
       if (circle) {
         circle.attr("stroke", "#000")
+        circle.attr("stroke-width", "2px")
       }
     }
   }
