@@ -137,17 +137,30 @@ class Movies {
     this._selected_movies = movies
   }
 
-  addMovieToSelection(movie) {
-    if (!this._selected_movies.includes(movie)) {
-      this._selected_movies.push(movie)
-      console.log(movie)
-      d3.select("#selected-movies").append("div").text(movie.name)
+
+  removeMovieFromSelection(movie) {
+    if (this._selected_movies.includes(movie)) {
+      this._selected_movies = this._selected_movies.filter(function(d) { return d != movie })
+      var div = document.getElementById("div-" + movie.name.replace(" ", ""))
+      console.log(div)
+      d3.select(div).remove()
     }
   }
 
-  removeMovieFromSelection(movie_name) {
-    if (this._selected_movies.includes(movie)) {
-      this._selected_movies = this._selected_movies.filter(function(d) { return d.name != movie_name })
+  addMovieToSelection(movie) {
+    if (!this._selected_movies.includes(movie)) {
+      this._selected_movies.push(movie)
+      //console.log(movie)
+      d3.select("#selected-movies")
+        .append("div")
+        .text(movie.name)
+        .attr("id", "div-" + movie.name.replace(" ", ""))
+        .append("input")
+        .attr("type", "button")
+        .attr("value", "remove")
+        .on("click", () => {
+          this.removeMovieFromSelection(movie)
+        })
     }
   }
 
