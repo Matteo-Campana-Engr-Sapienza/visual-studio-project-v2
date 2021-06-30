@@ -142,8 +142,15 @@ class Movies {
     if (this._selected_movies.includes(movie)) {
       this._selected_movies = this._selected_movies.filter(function(d) { return d != movie })
       var div = document.getElementById("div-" + movie.name.replace(" ", ""))
-      console.log(div)
       d3.select(div).remove()
+
+      var circle = d3.select("#scatterPlotPCA").selectAll("circle").filter(function(circle) {
+        return circle.label.name == movie.name
+      })
+
+      if (circle) {
+        circle.attr("stroke", null)
+      }
     }
   }
 

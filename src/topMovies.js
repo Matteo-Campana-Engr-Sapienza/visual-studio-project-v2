@@ -104,6 +104,7 @@ function top10Movies(data, movies, selector) {
         return circle.label.name == d.key
       })
       var movie = circle._groups[0][0].__data__.label
+      circle.attr("stroke", "#000")
       movies.addMovieToSelection(movie)
     })
 
@@ -238,6 +239,7 @@ function updateTop10Movies(new_data, old_data, movies, selector) {
       var circle = d3.select("#scatterPlotPCA").selectAll("circle").filter(function(circle) {
         return circle.label.name == d.key
       })
+      circle.attr("stroke", "#000")
       var movie = circle._groups[0][0].__data__.label
       movies.addMovieToSelection(movie)
     })

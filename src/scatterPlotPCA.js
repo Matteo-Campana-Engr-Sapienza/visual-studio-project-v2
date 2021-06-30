@@ -168,7 +168,11 @@ function drawScatterPlotPCA(data, movies, selector) {
 
 }
 
-function reDrawScatterPlotPCA(data) {
+function reDrawScatterPlotPCA(data, movies, selector) {
   d3.select("#scatterPlotPCA").select("*").remove().exit()
-  drawScatterPlotPCA(data)
+  drawScatterPlotPCA(data, movies, selector)
+  var circles = d3.select("#scatterPlotPCA").selectAll("circle").filter(function(circle) {
+    return movies._selected_movies.includes(circle.label)
+  })
+  circles.attr("stroke", "#000")
 }
