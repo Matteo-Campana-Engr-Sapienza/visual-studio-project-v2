@@ -20,7 +20,7 @@ The application is composed by 5 plots
 - Clicking on one or more bar of the bar-plot, the selected movies will apperars in the selected movies window.
 - Clicking on one or more points in the pca-plot, the selected movies will apperars in the selected movies window.
 
-### Plots Interactions
+### Interactions between plots
 
 - Each time a movie is selected a black stroke appear around the relative point in the pca plot, representing the given movie.
 - Each time a movie is selected the relative circle inside the circle-packing-plot will be highlighted with the color of the relative point and bar.
