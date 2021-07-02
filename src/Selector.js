@@ -53,7 +53,7 @@ class Selector {
       d3.select("#slider-label").text(minYear + "-" + maxYear)
       movies._selected_years = [minYear, maxYear]
     });
-
+    //--------------------------------------------------------------------------
     d3.select("#btn-search").on("click", () => {
 
       reDrawScatterPlotPCA(movies.getFilteredData(), movies, this)
@@ -63,6 +63,8 @@ class Selector {
 
 
     })
+
+    //--------------------------------------------------------------------------
     d3.select("#btn-reset").on("click", () => {
       this.genres_div.selectAll("input").attr("class", "btn btn-light btn-selector")
       movies._selected_genres = []
@@ -80,6 +82,35 @@ class Selector {
       updateTop10Movies(movies._movies_data, movies._movies_data, movies, this)
     })
 
+    //--------------------------------------------------------------------------
+
+
+    d3.select("#btn-clear-selected-movies").on("click", () => {
+      d3.select("#selected-movies").selectAll("div").remove()
+
+      // var selected_movies_div = document.getElementById("#selected-movies")
+      // console.log(selected_movies_div)
+      movies._selected_movies.map((movie) => {
+        movies.removeMovieFromSelection(movie)
+      })
+
+    })
+
+
+    //--------------------------------------------------------------------------
+
+    d3.select("#btn-plot-selected-movies").on("click", () => {
+
+      d3.select("#circle-packing-container").select("*").remove().exit()
+
+      drawCirclePacking(movies._selected_movies, movies, this)
+
+      reDrawScatterPlotPCA(movies._selected_movies, movies, this)
+
+      updateTop10Movies(movies._selected_movies, movies._movies_data, movies, this)
+    })
+
+    //--------------------------------------------------------------------------
   }
 
 }

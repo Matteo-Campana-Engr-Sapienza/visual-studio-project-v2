@@ -142,6 +142,7 @@ class Movies {
     if (this._selected_movies.includes(movie)) {
       this._selected_movies = this._selected_movies.filter(function(d) { return d != movie })
       var div = document.getElementById("div-" + movie.name.replaceAll(/[^a-zA-Z0-9]/g, '_'))
+      d3.select(div).selectAll().remove()
       d3.select(div).remove()
 
       var circle = d3.select("#scatterPlotPCA").selectAll("circle").filter(function(circle) {
@@ -232,6 +233,7 @@ class Movies {
             .attr("value", "Close")
             .attr("id", "btn-remove-" + movie.name.replaceAll(/[^a-zA-Z0-9]/g, '_'))
             .on("click", () => {
+              d3.select("#div-more-info" + movie.name.replaceAll(/[^a-zA-Z0-9]/g, '_')).selectAll().remove()
               d3.select("#div-more-info" + movie.name.replaceAll(/[^a-zA-Z0-9]/g, '_')).remove()
               d3.select("#btn-remove-" + movie.name.replaceAll(/[^a-zA-Z0-9]/g, '_')).remove()
             })
