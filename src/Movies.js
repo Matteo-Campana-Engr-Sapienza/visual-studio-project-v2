@@ -141,9 +141,12 @@ class Movies {
   removeMovieFromSelection(movie) {
     if (this._selected_movies.includes(movie)) {
       this._selected_movies = this._selected_movies.filter(function(d) { return d != movie })
-      var div = document.getElementById("div-" + movie.name.replaceAll(/[^a-zA-Z0-9]/g, '_'))
-      d3.select(div).selectAll().remove()
-      d3.select(div).remove()
+      // var div = document.getElementById("div-" + movie.name.replaceAll(/[^a-zA-Z0-9]/g, '_'))
+      // d3.select(div).selectAll().remove()
+      // d3.select(div).remove()
+
+      d3.select("#div-" + movie.name.replaceAll(/[^a-zA-Z0-9]/g, '_')).selectAll().remove()
+      d3.select("#div-" + movie.name.replaceAll(/[^a-zA-Z0-9]/g, '_')).remove()
 
       var circle = d3.select("#scatterPlotPCA").selectAll("circle").filter(function(circle) {
         return circle.label.name == movie.name
@@ -169,10 +172,11 @@ class Movies {
         .attr("id", "div-" + movie.name.replaceAll(/[^a-zA-Z0-9]/g, '_'))
 
 
-      var card = d3.select("#selected-movies")
-        .append("div")
-        .attr("class", "card")
-        .attr("id", "div-" + movie.name.replaceAll(/[^a-zA-Z0-9]/g, '_'))
+      // var card = d3.select("#selected-movies")
+      //   .append("div")
+      //   .attr("class", "card")
+      //   .attr("id", "div-card-" + movie.name.replaceAll(/[^a-zA-Z0-9]/g, '_'))
+
 
       var card_body = div.append("div").attr("class", "card").append("div").attr("class", "card-body")
       card_body.append("h5").attr("class", "card-title").text(movie.name)
