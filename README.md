@@ -10,7 +10,7 @@ The application is composed by 5 plots
 - The pca-plot represents the selection of movies in a 2 components PCA.
 - The circle-packing plots shows the moview categorized by year -> genre -> rating -> name.
 - The selctor on the top right of the viewport is a filter promp that execute an or over the same categories and an intersection over the filtered results.
-- The bottom right window show the selected movies.
+- The bottom right window shows the selected movies.
 
 ### Manual
 
