@@ -161,18 +161,93 @@ class Movies {
     if (!this._selected_movies.includes(movie)) {
       this._selected_movies.push(movie)
 
-      d3.select("#selected-movies")
+      var div = d3.select("#selected-movies")
         .append("div")
         .attr("class", "div-selected-movie")
-        .text(movie.name)
+        .style("background-color", myColor(movie.rating))
         .attr("id", "div-" + movie.name.replaceAll(/[^a-zA-Z0-9]/g, '_'))
-        .append("input")
+
+
+      var card = d3.select("#selected-movies")
+        .append("div")
+        .attr("class", "card")
+        .attr("id", "div-" + movie.name.replaceAll(/[^a-zA-Z0-9]/g, '_'))
+
+      var card_body = div.append("div").attr("class", "card").append("div").attr("class", "card-body")
+      card_body.append("h5").attr("class", "card-title").text(movie.name)
+      var card_text = card_body.append("div")
+      card_text.append("p").attr("class", "card-text").text("Score : " + movie.score)
+
+      var btn_group = card_body.append("div")
+        .attr("class", "btn-group")
+        .attr("role", "group")
+
+      btn_group.append("input")
         .attr("type", "button")
-        .attr("value", "remove")
-        .attr("class", "btn btn-light btn-remove-movie")
+        .attr("class", "btn btn-outline-primary")
+        .attr("value", "More Info")
+        .on("click", () => {
+
+          //budget,company,country,director,genre,gross,name,rating,released,runtime,score,star,votes,writer,year
+
+          if (document.getElementById("div-more-info" + movie.name.replaceAll(/[^a-zA-Z0-9]/g, '_'))) {
+            d3.select("#div-more-info" + movie.name.replaceAll(/[^a-zA-Z0-9]/g, '_')).remove()
+            d3.select("#btn-remove-" + movie.name.replaceAll(/[^a-zA-Z0-9]/g, '_')).remove()
+          }
+          var more_info = card_text.append("div").attr("id", "div-more-info" + movie.name.replaceAll(/[^a-zA-Z0-9]/g, '_'))
+
+          more_info
+            .append("p")
+            .attr("class", "card-text")
+            .text("Company : " + movie.company)
+
+          more_info
+            .append("p")
+            .attr("class", "card-text")
+            .text("Country : " + movie.country)
+
+          more_info
+            .append("p")
+            .attr("class", "card-text")
+            .text("Director : " + movie.director)
+
+          more_info
+            .append("p")
+            .attr("class", "card-text")
+            .text("Star : " + movie.star)
+
+          more_info
+            .append("p")
+            .attr("class", "card-text")
+            .text("Writer : " + movie.writer)
+
+          more_info
+            .append("p")
+            .attr("class", "card-text")
+            .text("")
+
+          btn_group.append("input")
+            .attr("type", "button")
+            .attr("class", "btn btn-outline-primary")
+            .attr("value", "Close")
+            .attr("id", "btn-remove-" + movie.name.replaceAll(/[^a-zA-Z0-9]/g, '_'))
+            .on("click", () => {
+              d3.select("#div-more-info" + movie.name.replaceAll(/[^a-zA-Z0-9]/g, '_')).remove()
+              d3.select("#btn-remove-" + movie.name.replaceAll(/[^a-zA-Z0-9]/g, '_')).remove()
+            })
+
+        })
+
+      btn_group.append("input")
+        .attr("type", "button")
+        .attr("class", "btn btn-outline-primary")
+        .attr("value", "Remove")
         .on("click", () => {
           this.removeMovieFromSelection(movie)
         })
+
+
+
 
       var circle = d3.select("#scatterPlotPCA").selectAll("circle").filter(function(circle) {
         return circle.label.name == movie.name
