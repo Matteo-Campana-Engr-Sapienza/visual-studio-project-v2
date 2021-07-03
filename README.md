@@ -1,4 +1,4 @@
-# visual-analytic-project-v2
+# visual-analytic-project
 
 This project aim to give to the user an overview over the movies presents in the database, and according to his/her tastes help to find an enjoyable movie for his/her free time.
 
